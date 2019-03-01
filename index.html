@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>самописание</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+  </head>
+  <body>
+    <div class='content'></div>
+    <script src="./jquery.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+       var p = $('.content');
+       p.text('');
+
+       inc(p);
+      });
+
+      var text = `магазин качеств`;
+
+      var i = 0;
+      var j = 0;
+
+      function inc(p) {
+        var interval = .12;
+        var array = text.split(/[\{\}]/); // Split on embraces
+
+        if (i < array.length) {
+      		const character = array[i].charAt(j) === '<' ? '<br/>' : array[i].charAt(j)
+          p.append(character);
+
+      		console.log(array[i].charAt(j))
+
+          if (j == array[i].length -1 && typeof array[i + 1] !== "undefined") {
+            interval = array[i + 1];
+            i += 2;
+            j = 0;
+          }
+
+          j++;
+          setTimeout(function () { inc(p); }, interval*500);
+        }
+      }
+
+    </script>
+  </body>
+</html>
